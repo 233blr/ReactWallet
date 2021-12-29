@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import UseAuth from "../hooks/useAuth";
 import {
 	View,
 	Text,
@@ -14,6 +15,7 @@ const LoginScreen = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
+	const { handelLogin, handelSingUp } = UseAuth();
 	const navigation = useNavigation();
 
 	useEffect(() => {
@@ -22,27 +24,7 @@ const LoginScreen = () => {
 				navigation.replace("Home");
 			}
 		});
-	}, [])
-
-	const handelSingUp = () => {
-		auth
-			.createUserWithEmailAndPassword(email, password)
-		.then(userCredentials => {
-			const user = userCredentials.user;
-			console.log('Registered with', user.email);
-		})
-			.catch(error => alert(error.message))
-	}
-
-	const handelLogin = () => {
-		auth
-			.signInWithEmailAndPassword(email, password)
-			.then(userCredentials => {
-				const user = userCredentials.user;
-				console.log('Login with', user.email);
-			})
-			.catch(error => alert(error.message))
-	}
+	}, []);
 
 	return (
 		<KeyboardAvoidingView
@@ -68,7 +50,7 @@ const LoginScreen = () => {
 
 			<View style={styles.buttonContainer}>
 				<TouchableOpacity
-					onPress={handelLogin}
+					onPress={() => handelLogin(email, password)}
 					style={styles.button}
 				>
 					<Text style={styles.buttonText}>
@@ -76,7 +58,7 @@ const LoginScreen = () => {
 					</Text>
 				</TouchableOpacity>
 				<TouchableOpacity
-					onPress={handelSingUp}
+					onPress={() => handelSingUp(email, password)}
 					style={[styles.button, styles.buttonOutline]}
 				>
 					<Text style={styles.buttonOutlineText}>

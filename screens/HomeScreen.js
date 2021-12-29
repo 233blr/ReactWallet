@@ -1,20 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { auth } from '../firebase';
-import { useNavigation } from '@react-navigation/core';
+import useAuth from "../hooks/useAuth";
 
 const HomeScreen = () => {
-
-	const navigation = useNavigation();
-
-	const handelSingOut = () => {
-		auth
-			.signOut()
-		.then(() => {
-			navigation.replace("Login");
-		})
-			.catch(error => alert(error.message))
-	}
+	const { handelSingOut } = useAuth();
 
 	return (
 		<View style={styles.container}>
