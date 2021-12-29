@@ -1,40 +1,45 @@
-import { useNavigation } from '@react-navigation/core'
-import React, { useEffect, useState } from 'react'
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { auth } from '../firebase'
+import React, { useEffect, useState } from 'react';
+import {
+	View,
+	Text,
+	TextInput,
+	StyleSheet,
+	TouchableOpacity,
+	KeyboardAvoidingView,
+} from 'react-native';
+import { auth } from '../firebase';
+import { useNavigation } from '@react-navigation/core';
 
 const LoginScreen = () => {
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
 
-	const navigation = useNavigation()
+	const navigation = useNavigation();
 
 	useEffect(() => {
-		const unsubscribe = auth.onAuthStateChanged(user => {
+		return auth.onAuthStateChanged(user => {
 			if (user) {
-				navigation.replace("Home")
+				navigation.replace("Home");
 			}
-		})
-
-		return unsubscribe
+		});
 	}, [])
 
-	const handleSignUp = () => {
+	const handelSingUp = () => {
 		auth
 			.createUserWithEmailAndPassword(email, password)
-			.then(userCredentials => {
-				const user = userCredentials.user;
-				console.log('Registered with:', user.email);
-			})
+		.then(userCredentials => {
+			const user = userCredentials.user;
+			console.log('Registered with', user.email);
+		})
 			.catch(error => alert(error.message))
 	}
 
-	const handleLogin = () => {
+	const handelLogin = () => {
 		auth
 			.signInWithEmailAndPassword(email, password)
 			.then(userCredentials => {
 				const user = userCredentials.user;
-				console.log('Logged in with:', user.email);
+				console.log('Login with', user.email);
 			})
 			.catch(error => alert(error.message))
 	}
@@ -44,6 +49,7 @@ const LoginScreen = () => {
 			style={styles.container}
 			behavior="padding"
 		>
+
 			<View style={styles.inputContainer}>
 				<TextInput
 					placeholder="Email"
@@ -62,23 +68,28 @@ const LoginScreen = () => {
 
 			<View style={styles.buttonContainer}>
 				<TouchableOpacity
-					onPress={handleLogin}
+					onPress={handelLogin}
 					style={styles.button}
 				>
-					<Text style={styles.buttonText}>Login</Text>
+					<Text style={styles.buttonText}>
+						Login
+					</Text>
 				</TouchableOpacity>
 				<TouchableOpacity
-					onPress={handleSignUp}
+					onPress={handelSingUp}
 					style={[styles.button, styles.buttonOutline]}
 				>
-					<Text style={styles.buttonOutlineText}>Register</Text>
+					<Text style={styles.buttonOutlineText}>
+						Register
+					</Text>
 				</TouchableOpacity>
 			</View>
+
 		</KeyboardAvoidingView>
 	)
-}
+};
 
-export default LoginScreen
+export default LoginScreen;
 
 const styles = StyleSheet.create({
 	container: {
@@ -90,7 +101,7 @@ const styles = StyleSheet.create({
 		width: '80%'
 	},
 	input: {
-		backgroundColor: 'white',
+		backgroundColor: '#FFF',
 		paddingHorizontal: 15,
 		paddingVertical: 10,
 		borderRadius: 10,
@@ -110,13 +121,13 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	buttonOutline: {
-		backgroundColor: 'white',
+		backgroundColor: '#FFF',
 		marginTop: 5,
 		borderColor: '#0782F9',
 		borderWidth: 2,
 	},
 	buttonText: {
-		color: 'white',
+		color: '#FFF',
 		fontWeight: '700',
 		fontSize: 16,
 	},
@@ -125,4 +136,4 @@ const styles = StyleSheet.create({
 		fontWeight: '700',
 		fontSize: 16,
 	},
-});
+})
