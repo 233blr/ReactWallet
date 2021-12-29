@@ -14,7 +14,7 @@ const UseAuth = () => {
 				})
 				.catch(error => alert(error.message))
 		},
-		handelLogin: (email, password) => {
+		handelLogIn: (email, password) => {
 			auth
 				.signInWithEmailAndPassword(email, password)
 				.then(userCredentials => {
