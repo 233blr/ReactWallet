@@ -1,21 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import UseAuth from "../hooks/useAuth";
-import {
-	View,
-	Text,
-	TextInput,
-	TouchableOpacity,
-	KeyboardAvoidingView,
-} from 'react-native';
+import { KeyboardAvoidingView, TextInput, View, } from 'react-native';
 import { auth } from '../firebase';
 import { useNavigation } from '@react-navigation/core';
 import { globalStyles } from '../styles/global';
+import Button from "../components/Button";
+import UseAuth from "../hooks/useAuth";
 
 const LoginScreen = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
-	const { handelLogIn, handelSingUp } = UseAuth();
+	const {handelLogIn, handelSingUp} = UseAuth();
 	const navigation = useNavigation();
 
 	useEffect(() => {
@@ -49,22 +44,18 @@ const LoginScreen = () => {
 			</View>
 
 			<View style={globalStyles.buttonContainer}>
-				<TouchableOpacity
-					onPress={() => handelLogIn(email, password)}
-					style={globalStyles.button}
-				>
-					<Text style={globalStyles.buttonText}>
-						Login
-					</Text>
-				</TouchableOpacity>
-				<TouchableOpacity
-					onPress={() => handelSingUp(email, password)}
-					style={[globalStyles.button, globalStyles.buttonOutline]}
-				>
-					<Text style={globalStyles.buttonOutlineText}>
-						Register
-					</Text>
-				</TouchableOpacity>
+				<Button
+					handelFunk={() => handelLogIn(email, password)}
+					btnStyle={globalStyles.button}
+					textStyle={globalStyles.buttonText}
+					text={'Login'}
+				/>
+				<Button
+					handelFunk={() => handelSingUp(email, password)}
+					btnStyle={[globalStyles.button, globalStyles.buttonOutline]}
+					textStyle={globalStyles.buttonOutlineText}
+					text={'Register'}
+				/>
 			</View>
 
 		</KeyboardAvoidingView>
