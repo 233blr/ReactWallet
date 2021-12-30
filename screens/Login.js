@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { KeyboardAvoidingView, TextInput, View, } from 'react-native';
 import { auth } from '../firebase';
 import { useNavigation } from '@react-navigation/core';
-import { globalStyles } from '../styles/global';
-import Button from "../components/Button";
-import UseAuth from "../hooks/useAuth";
+import { globalStyles } from '../styles';
+import { Button } from '../components';
+import UseAuth from '../hooks/useAuth';
 
-const LoginScreen = () => {
+const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
@@ -16,7 +16,7 @@ const LoginScreen = () => {
 	useEffect(() => {
 		return auth.onAuthStateChanged(user => {
 			if (user) {
-				navigation.replace("Home");
+				navigation.replace('Home');
 			}
 		});
 	}, []);
@@ -24,18 +24,18 @@ const LoginScreen = () => {
 	return (
 		<KeyboardAvoidingView
 			style={globalStyles.container}
-			behavior="padding"
+			behavior='padding'
 		>
 
 			<View style={globalStyles.inputContainer}>
 				<TextInput
-					placeholder="Email"
+					placeholder='Email'
 					value={email}
 					onChangeText={text => setEmail(text)}
 					style={globalStyles.input}
 				/>
 				<TextInput
-					placeholder="Password"
+					placeholder='Password'
 					value={password}
 					onChangeText={text => setPassword(text)}
 					style={globalStyles.input}
@@ -62,4 +62,4 @@ const LoginScreen = () => {
 	)
 };
 
-export default LoginScreen;
+export default Login;

@@ -1,17 +1,17 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { auth } from '../firebase';
-import useAuth from "../hooks/useAuth";
-import { globalStyles } from '../styles/global';
-import Button from "../components/Button";
+import useAuth from '../hooks/useAuth';
+import { globalStyles } from '../styles';
+import { Button } from '../components';
 
-const HomeScreen = () => {
-	const { handelSingOut } = useAuth();
+const Home = () => {
+	const {handelSingOut} = useAuth();
 
 	return (
 		<View style={globalStyles.container}>
 			<Text>
-				Email: {auth.currentUser?.email}
+				Hello {auth.currentUser?.email}!
 			</Text>
 			<Button
 				handelFunk={handelSingOut}
@@ -23,4 +23,4 @@ const HomeScreen = () => {
 	)
 }
 
-export default HomeScreen
+export default Home
