@@ -1,5 +1,5 @@
 export default {
 	white: '#FFF',
-	blue: '#0782F9',
+	blue: '#2e85da',
 	grey: '#777',
 }

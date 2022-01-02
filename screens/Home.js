@@ -14,7 +14,7 @@ const Home = () => {
 				Hello {auth.currentUser?.email}!
 			</Text>
 			<Button
-				handelFunk={handelSingOut}
+				onPressButton={handelSingOut}
 				btnStyle={globalStyles.singOutButton}
 				textStyle={globalStyles.buttonText}
 				text={'Sing out'}
@@ -23,4 +23,4 @@ const Home = () => {
 	)
 }
 
-export default Home
+export default Home;

@@ -54,4 +54,52 @@ export const globalStyles = StyleSheet.create({
 		alignItems: 'center',
 		marginTop: 40,
 	},
+	inputConversionContainer: {
+		width: '80%',
+		alignItems: "center"
+	},
+	conversionInput: {
+		backgroundColor: colors.white,
+		borderRadius: 10,
+		paddingHorizontal: 15,
+		paddingVertical: 10,
+		marginTop: 5,
+		marginBottom: 15,
+		flexDirection: 'row',
+	},
+	conversionButton: {
+		padding: 3,
+		paddingRight: 10,
+		borderRightColor: colors.grey,
+		borderRightWidth: 1,
+	},
+	conversionText: {
+		fontSize: 18,
+		color: colors.blue,
+		fontWeight: "bold",
+	},
+	conversionTextInput: {
+		flex: 1,
+		padding: 5,
+		color: colors.grey,
+	},
+	modalView: {
+		marginTop: 150,
+		margin: 20,
+		backgroundColor: "white",
+		borderRadius: 10,
+		padding: 35,
+		alignItems: "center",
+		shadowColor: "#000",
+		shadowOffset: {
+			width: 0,
+			height: 2
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 4,
+		elevation: 5
+	},
+	modalTitle: {
+		color: colors.grey,
+	},
 })

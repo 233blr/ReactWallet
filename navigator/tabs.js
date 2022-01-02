@@ -9,11 +9,7 @@ const Tab = createBottomTabNavigator();
 
 const Tabs = () => {
 	return (
-		<Tab.Navigator
-			tabBarOptions={{
-				showLabel: false,
-			}}
-		>
+		<Tab.Navigator>
 			<Tab.Screen
 				name="Home"
 				component={Home}

@@ -16,7 +16,7 @@ const Login = () => {
 	useEffect(() => {
 		return auth.onAuthStateChanged(user => {
 			if (user) {
-				navigation.replace('Home');
+				navigation.replace('Main');
 			}
 		});
 	}, []);
@@ -45,13 +45,13 @@ const Login = () => {
 
 			<View style={globalStyles.buttonContainer}>
 				<Button
-					handelFunk={() => handelLogIn(email, password)}
+					onPressButton={() => handelLogIn(email, password)}
 					btnStyle={globalStyles.button}
 					textStyle={globalStyles.buttonText}
 					text={'Login'}
 				/>
 				<Button
-					handelFunk={() => handelSingUp(email, password)}
+					onPressButton={() => handelSingUp(email, password)}
 					btnStyle={[globalStyles.button, globalStyles.buttonOutline]}
 					textStyle={globalStyles.buttonOutlineText}
 					text={'Register'}
