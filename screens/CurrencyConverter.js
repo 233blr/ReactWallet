@@ -20,7 +20,7 @@ const CurrencyConverter = () => {
 			setAmountTo('');
 		} else {
 			axios.get(`${URL}?from=${currencyValue[0]}&to=${currencyValue[1]}&amount=${amountFrom}`)
-				.then(response => setAmountTo(response.data.result))
+				.then(response => setAmountTo(response.data.result.toFixed(2)))
 				.catch(error => alert(error.message))
 		}
 	}, [currencyValue, amountFrom]);

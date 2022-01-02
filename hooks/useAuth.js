@@ -8,19 +8,11 @@ const UseAuth = () => {
 		handelSingUp: (email, password) => {
 			auth
 				.createUserWithEmailAndPassword(email, password)
-				// .then(userCredentials => {
-				// 	const user = userCredentials.user;
-				// 	console.log('Registered with', user.email)
-				// })
 				.catch(error => alert(error.message));
 		},
 		handelLogIn: (email, password) => {
 			auth
 				.signInWithEmailAndPassword(email, password)
-				// .then(userCredentials => {
-				// 	const user = userCredentials.user;
-				// 	console.log('Login with', user.email);
-				// })
 				.catch(error => alert(error.message))
 		},
 		handelSingOut: () => {
