@@ -1,9 +1,9 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Login } from './screens';
 import Tabs from './navigator/tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from "react-native";
+import { Login } from './screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,7 +14,7 @@ const App = () => {
 				<Stack.Screen options={{headerShown: false}} name="Login" component={Login}/>
 				<Stack.Screen options={{headerShown: false}} name="Main" component={Tabs}/>
 			</Stack.Navigator>
-			<StatusBar barStyle='dark-content' />
+			<StatusBar barStyle='dark-content'/>
 		</NavigationContainer>
 	);
 }

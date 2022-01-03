@@ -86,11 +86,11 @@ export const globalStyles = StyleSheet.create({
 	modalView: {
 		marginTop: 150,
 		margin: 20,
-		backgroundColor: "white",
+		backgroundColor: colors.white,
 		borderRadius: 10,
 		padding: 35,
 		alignItems: "center",
-		shadowColor: "#000",
+		shadowColor: colors.black,
 		shadowOffset: {
 			width: 0,
 			height: 2
@@ -102,4 +102,33 @@ export const globalStyles = StyleSheet.create({
 	modalTitle: {
 		color: colors.grey,
 	},
+	transactionContainer: {
+		flex: 1,
+		alignItems: "center",
+	},
+	transactionInput: {
+		marginTop: 15,
+		width: '80%',
+	},
+	transactionTextInput: {
+		backgroundColor: colors.white,
+		borderRadius: 10,
+		paddingHorizontal: 15,
+		paddingVertical: 10,
+		marginTop: 5,
+		marginBottom: 5,
+	},
+	transactionInputList: {
+		top: 65,
+		position: "absolute",
+		backgroundColor: colors.white,
+		zIndex: 1000,
+		elevation: 1000,
+		width: '80%',
+		borderBottomRightRadius: 10,
+		borderBottomLeftRadius: 10,
+	},
+	transactionInputListItem: {
+		margin: 15,
+	}
 })

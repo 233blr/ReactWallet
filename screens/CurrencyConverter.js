@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Keyboard, Modal, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { URL } from '../api/exchangerate';
 import { globalStyles } from '../styles';
-import { Button } from '../components';
-import ConversionInput from '../components/ConversionInput';
+import { Button, ConversionInput } from '../components';
 import modalValues from '../constans/modalValues';
 import currency from '../constans/currency';
 import axios from 'axios';
@@ -23,7 +22,7 @@ const CurrencyConverter = () => {
 				.then(response => setAmountTo(response.data.result.toFixed(2)))
 				.catch(error => alert(error.message))
 		}
-	}, [currencyValue, amountFrom]);
+	}, [amountFrom, currencyValue]);
 
 	return (
 		<TouchableWithoutFeedback onPress={Keyboard.dismiss}>

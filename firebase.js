@@ -21,6 +21,12 @@ if (firebase.apps.length === 0) {
 	app = firebase.app();
 }
 
-const auth = firebase.auth();
+export const auth = firebase.auth();
 
-export { auth };
+export const db = firebase.database();
+
+// db.ref('new').push('hello');
+
+// const user = db.ref('user').on('value', el => console.log(el.val()));
+
+// console.log(user);
