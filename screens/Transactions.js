@@ -13,8 +13,7 @@ const Transactions = () => {
 	const [value, setValue] = useState('');
 
 	useEffect(() => {
-		db.ref('users')
-			.on('value', users => setUsers(Object.values(users.val())))
+		db.ref('users').on('value', users => setUsers(Object.values(users.val())));
 	}, []);
 
 	return (

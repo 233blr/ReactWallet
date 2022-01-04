@@ -1,6 +1,7 @@
 import React from 'react';
-import { FlatList, Text, TouchableOpacity } from 'react-native';
+import { FlatList } from 'react-native';
 import { globalStyles } from '../styles';
+import TransactionInputItem from "./TransactionInputItem";
 
 const TransactionInput = ({data, selectUser}) => {
 	return (
@@ -9,15 +10,10 @@ const TransactionInput = ({data, selectUser}) => {
 				style={globalStyles.transactionInputList}
 				data={data}
 				renderItem={({item}) => (
-					<TouchableOpacity
-						style={globalStyles.transactionInputListItem}
-						key={item}
-						onPress={() => selectUser(item)}
-					>
-						<Text>
-							{item}
-						</Text>
-					</TouchableOpacity>
+					<TransactionInputItem
+						item={item}
+						onPress={selectUser}
+					/>
 				)
 				}
 			/> :
