@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Button, TransactionInput, TransactionInputList } from '../components';
 import { globalStyles } from '../styles';
-import { FlatList, Text, View } from 'react-native';
 import { auth, db, rootRef } from '../firebase';
+import { FlatList, Keyboard, Text, View, TouchableWithoutFeedback } from 'react-native';
 import filterUsers from '../helpers/filterUsers';
 import checkTransaction from '../helpers/checkTransaction';
 import HistoryButtons from "../components/HistoryButtons";
@@ -35,6 +35,7 @@ const Transactions = () => {
 	}, []);
 
 	return (
+		<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
 		<View style={globalStyles.transactionContainer}>
 			<TransactionInput
 				placeholder={'user email'}
@@ -93,6 +94,7 @@ const Transactions = () => {
 				}
 			</View>
 		</View>
+		</TouchableWithoutFeedback>
 	)
 }
 

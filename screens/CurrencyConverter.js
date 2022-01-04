@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Keyboard, Modal, Text, TouchableWithoutFeedback, View } from 'react-native';
-import { URL } from '../api/exchangerate';
+// import { URL } from '../api/exchangerate';
 import { globalStyles } from '../styles';
 import { Button, ConversionInput } from '../components';
 import modalValues from '../constans/modalValues';
 import currency from '../constans/currency';
 import axios from 'axios';
+import { URL } from "@env";
 
 const CurrencyConverter = () => {
 	const [modalVisible, setModalVisible] = useState(false);
