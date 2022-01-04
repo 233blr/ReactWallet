@@ -16,6 +16,7 @@ const TransactionInput = ({data, selectUser}) => {
 					/>
 				)
 				}
+				keyExtractor={(item, index) => index.toString()}
 			/> :
 			null
 	)

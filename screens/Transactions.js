@@ -6,21 +6,27 @@ import { auth, db, rootRef } from '../firebase';
 import filterUsers from '../helpers/filterUsers';
 import checkTransaction from '../helpers/checkTransaction';
 import HistoryButtons from "../components/HistoryButtons";
-import HistItem from "../components/HistItem";
+import TransactionHistItem from "../components/TransactionHistItem";
 
 const Transactions = () => {
-	const [users, setUsers] = useState([]);
-	const [currentUsers, setCurrentUsers] = useState([]);
 	const [user, setUser] = useState('');
 	const [value, setValue] = useState('');
+	const [users, setUsers] = useState([]);
 	const [histValues, setHistValues] = useState([]);
+	const [currentUsers, setCurrentUsers] = useState([]);
 
 	const setTransactions = (value, email) => {
 		rootRef
 			.child('transactions')
 			.orderByChild(`${value}`)
 			.equalTo(`${email}`)
-			.on('value', item => setHistValues(Object.values(item.val())));
+			.on('value', item => {
+				if (item.val()) {
+					setHistValues(Object.values(item.val()));
+				} else {
+					setHistValues(null);
+				}
+			});
 	};
 
 	useEffect(() => {
@@ -71,11 +77,20 @@ const Transactions = () => {
 						setTo={() => setTransactions('toUser', auth.currentUser?.email)}
 					/>
 				</View>
-				<FlatList
-					style={globalStyles.transactionHistList}
-					data={histValues}
-					renderItem={({item}) => <HistItem data={item}/>}
-				/>
+				{
+					histValues ? (
+						<FlatList
+							style={globalStyles.transactionHistList}
+							data={histValues}
+							renderItem={({item}) => <TransactionHistItem data={item}/>}
+							keyExtractor={(item, index) => index.toString()}
+						/>
+					) : (
+						<View style={globalStyles.transactionNoData}>
+							<Text>No transactions</Text>
+						</View>
+					)
+				}
 			</View>
 		</View>
 	)

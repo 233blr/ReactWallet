@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native';
 import colors from '../constans/colors';
-import HistItem from "../components/HistItem";
 
 export const globalStyles = StyleSheet.create({
 	container: {
@@ -147,7 +146,6 @@ export const globalStyles = StyleSheet.create({
 		width: '80%',
 		borderRadius: 10,
 		marginTop: 10,
-		overflow: "hidden",
 	},
 	translationFilterButton: {
 		margin: 5,
@@ -168,5 +166,11 @@ export const globalStyles = StyleSheet.create({
 		paddingLeft: 10,
 		borderLeftColor: colors.grey,
 		borderLeftWidth: 1,
+	},
+	transactionNoData: {
+		display: "flex",
+		alignItems: "center",
+		justifyContent: "center",
+		height: 200,
 	}
 })

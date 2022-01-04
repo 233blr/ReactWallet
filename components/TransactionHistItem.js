@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 import { auth } from "../firebase";
 import { globalStyles } from "../styles";
 
-const HistItem = ({data}) => {
+const TransactionHistItem = ({data}) => {
 	return (
 		<View style={globalStyles.transactionHistItem}>
 			{
@@ -12,9 +12,9 @@ const HistItem = ({data}) => {
 					<Text>from: {data.fromUser}</Text>
 			}
 			<Text>sum: {data.value}</Text>
-			<Text>date: {data.date}</Text>
+			<Text>date: {new Date(data.date).toUTCString().slice(5, 22)}</Text>
 		</View>
 	)
 }
 
-export default HistItem;
+export default TransactionHistItem;

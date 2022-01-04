@@ -8,8 +8,8 @@ const checkTransaction = (user, value, users) => {
 	) {
 		setDataBase.addNewTransaction(user, value);
 		Alert.alert(
-			'Sent',
-			`sent ${value} to user ${user}`
+			'Send',
+			`send ${value} to user ${user}`
 		);
 	} else {
 		Alert.alert(
