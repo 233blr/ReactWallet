@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import colors from '../constans/colors';
+import HistItem from "../components/HistItem";
 
 export const globalStyles = StyleSheet.create({
 	container: {
@@ -130,5 +131,42 @@ export const globalStyles = StyleSheet.create({
 	},
 	transactionInputListItem: {
 		margin: 15,
+	},
+	translationHistTitle: {
+		marginTop: 30,
+	},
+	translationHistButtons: {
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'space-around',
+		borderBottomColor: colors.black,
+		borderBottomWidth: 1,
+	},
+	translationListContainer: {
+		backgroundColor: colors.white,
+		width: '80%',
+		borderRadius: 10,
+		marginTop: 10,
+		overflow: "hidden",
+	},
+	translationFilterButton: {
+		margin: 5,
+	},
+	translationTextButton: {
+		fontWeight: '500',
+		fontSize: 14,
+		color: colors.blue,
+	},
+	translationTextButtonDisable: {
+		color: colors.grey,
+	},
+	transactionHistList: {
+		width: '100%',
+	},
+	transactionHistItem: {
+		margin: 10,
+		paddingLeft: 10,
+		borderLeftColor: colors.grey,
+		borderLeftWidth: 1,
 	}
 })

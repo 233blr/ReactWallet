@@ -8,9 +8,9 @@ const setDataBase = {
 	},
 	addNewTransaction: (user, value) => {
 		db
-			.ref('transaction').push({
+			.ref('transactions').push({
 			fromUser: auth.currentUser?.email,
-			toUser: user,
+			toUser: user.toLowerCase(),
 			value,
 			date: Date.now(),
 		})

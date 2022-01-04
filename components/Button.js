@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
-import { globalStyles } from "../styles";
+import { globalStyles } from '../styles';
 
 const Button = ({onPressButton, btnStyle, textStyle, text}) => {
 	return (

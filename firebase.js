@@ -25,8 +25,5 @@ export const auth = firebase.auth();
 
 export const db = firebase.database();
 
-// db.ref('new').push('hello');
+export const rootRef = db.ref();
 
-// const user = db.ref('user').on('value', el => console.log(el.val()));
-
-// console.log(user);
