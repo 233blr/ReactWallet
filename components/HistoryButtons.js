@@ -5,14 +5,20 @@ import { Text, TouchableOpacity } from "react-native";
 const HistoryButtons = ({setFrom, setTo}) => {
 	const [flag, setFlag] = useState(true);
 
+	const setTransactionFrom = () => {
+		setFrom();
+		setFlag(true);
+	};
+
+	const setTransactionTo = () => {
+		setTo();
+		setFlag(false);
+	}
+
 	return (
 		<>
 			<TouchableOpacity
-				onPress={() => {
-					setFrom();
-					setFlag(true)
-				}
-			}
+				onPress={setTransactionFrom}
 				style={globalStyles.translationFilterButton}
 			>
 				<Text style={flag ?
@@ -23,11 +29,7 @@ const HistoryButtons = ({setFrom, setTo}) => {
 				</Text>
 			</TouchableOpacity>
 			<TouchableOpacity
-				onPress={() => {
-					setTo();
-					setFlag(false)
-				}
-				}
+				onPress={setTransactionTo}
 				style={globalStyles.translationFilterButton}
 			>
 				<Text style={flag ?

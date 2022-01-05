@@ -21,6 +21,11 @@ const Login = () => {
 		});
 	}, []);
 
+	const addValues = (text, value) => {
+		if (value === 'email') setEmail(text);
+		else setPassword(text);
+	}
+
 	return (
 		<KeyboardAvoidingView
 			style={globalStyles.container}
@@ -31,13 +36,13 @@ const Login = () => {
 				<TextInput
 					placeholder='Email'
 					value={email}
-					onChangeText={text => setEmail(text)}
+					onChangeText={text => addValues(text, 'email')}
 					style={globalStyles.input}
 				/>
 				<TextInput
 					placeholder='Password'
 					value={password}
-					onChangeText={text => setPassword(text)}
+					onChangeText={text => addValues(text, 'pass')}
 					style={globalStyles.input}
 					secureTextEntry
 				/>

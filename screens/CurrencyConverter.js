@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Keyboard, Modal, Text, TouchableWithoutFeedback, View } from 'react-native';
-// import { URL } from '../api/exchangerate';
 import { globalStyles } from '../styles';
 import { Button, ConversionInput } from '../components';
 import modalValues from '../constans/modalValues';
@@ -25,6 +24,25 @@ const CurrencyConverter = () => {
 		}
 	}, [amountFrom, currencyValue]);
 
+	const addCurrencyValue = () => {
+		setCurrencyValue(prevValue => {
+			prevValue.splice(modalValue.value, 1, item)
+			return [...prevValue];
+		});
+		setModalVisible(!modalVisible);
+	};
+
+	const closeModal = () => setModalVisible(!modalVisible);
+
+	const getConversionSum = (text) => setAmountFrom(text);
+
+	const reverseCurrency = () => setCurrencyValue([...currencyValue.reverse()]);
+
+	const changeConversionValue = () => {
+		setModalVisible(true);
+		setModalValue(modalValues[1]);
+	};
+
 	return (
 		<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
 			<View style={globalStyles.container}>
@@ -43,20 +61,14 @@ const CurrencyConverter = () => {
 							.map(item => (
 								<Button
 									key={item}
-									onPressButton={() => {
-										setCurrencyValue(prevValue => {
-											prevValue.splice(modalValue.value, 1, item)
-											return [...prevValue];
-										});
-										setModalVisible(!modalVisible);
-									}}
+									onPressButton={addCurrencyValue}
 									btnStyle={[globalStyles.button, globalStyles.buttonOutline]}
 									textStyle={globalStyles.buttonOutlineText}
 									text={item}
 								/>
 							))}
 						<Button
-							onPressButton={() => setModalVisible(!modalVisible)}
+							onPressButton={closeModal}
 							btnStyle={globalStyles.singOutButton}
 							textStyle={globalStyles.buttonText}
 							text={'Close'}
@@ -73,7 +85,7 @@ const CurrencyConverter = () => {
 							setModalVisible(true);
 							setModalValue(modalValues[0]);
 						}}
-						onChangeValue={text => setAmountFrom(text)}
+						onChangeValue={text => getConversionSum(text)}
 						editable={true}
 					/>
 
@@ -81,15 +93,12 @@ const CurrencyConverter = () => {
 					<ConversionInput
 						text={currencyValue[1]}
 						value={amountTo.toString()}
-						onButtonPress={() => {
-							setModalVisible(true);
-							setModalValue(modalValues[1]);
-						}}
+						onButtonPress={changeConversionValue}
 						editable={false}
 					/>
 
 					<Button
-						onPressButton={() => setCurrencyValue([...currencyValue.reverse()])}
+						onPressButton={reverseCurrency}
 						btnStyle={globalStyles.singOutButton}
 						textStyle={globalStyles.buttonText}
 						text={'Reverse currency'}
