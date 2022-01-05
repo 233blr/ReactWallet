@@ -1,18 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Keyboard, Modal, Text, TouchableWithoutFeedback, View } from 'react-native';
-import { globalStyles } from '../styles';
+import { CurrencyContextContext } from '../context/CurrencyContext';
 import { Button, ConversionInput } from '../components';
+import { globalStyles } from '../styles';
+import { URL } from '@env';
 import modalValues from '../constans/modalValues';
 import currency from '../constans/currency';
 import axios from 'axios';
-import { URL } from "@env";
 
 const CurrencyConverter = () => {
-	const [modalVisible, setModalVisible] = useState(false);
-	const [modalValue, setModalValue] = useState({});
-	const [currencyValue, setCurrencyValue] = useState(['USD', 'EUR']);
-	const [amountFrom, setAmountFrom] = useState('');
-	const [amountTo, setAmountTo] = useState('');
+	const {
+		amountTo,
+		closeModal,
+		modalValue,
+		amountFrom,
+		setAmountTo,
+		modalVisible,
+		setModalValue,
+		currencyValue,
+		setModalVisible,
+		reverseCurrency,
+		addCurrencyValue,
+		getConversionSum,
+		changeConversionValue,
+	} = useContext(CurrencyContextContext);
 
 	useEffect(() => {
 		if (amountFrom.length === 0) {
@@ -23,25 +34,6 @@ const CurrencyConverter = () => {
 				.catch(error => alert(error.message))
 		}
 	}, [amountFrom, currencyValue]);
-
-	const addCurrencyValue = () => {
-		setCurrencyValue(prevValue => {
-			prevValue.splice(modalValue.value, 1, item)
-			return [...prevValue];
-		});
-		setModalVisible(!modalVisible);
-	};
-
-	const closeModal = () => setModalVisible(!modalVisible);
-
-	const getConversionSum = (text) => setAmountFrom(text);
-
-	const reverseCurrency = () => setCurrencyValue([...currencyValue.reverse()]);
-
-	const changeConversionValue = () => {
-		setModalVisible(true);
-		setModalValue(modalValues[1]);
-	};
 
 	return (
 		<TouchableWithoutFeedback onPress={Keyboard.dismiss}>

@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { KeyboardAvoidingView, TextInput, View, } from 'react-native';
-import { auth } from '../firebase';
 import { useNavigation } from '@react-navigation/core';
+import { LoginContext } from '../context/LoginContext';
 import { globalStyles } from '../styles';
 import { Button } from '../components';
+import { auth } from '../firebase';
 import UseAuth from '../hooks/useAuth';
 
 const Login = () => {
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-
+	const {email, password, addValues} = useContext(LoginContext);
 	const {handelLogIn, handelSingUp} = UseAuth();
 	const navigation = useNavigation();
 
@@ -21,17 +20,11 @@ const Login = () => {
 		});
 	}, []);
 
-	const addValues = (text, value) => {
-		if (value === 'email') setEmail(text);
-		else setPassword(text);
-	}
-
 	return (
 		<KeyboardAvoidingView
 			style={globalStyles.container}
 			behavior='padding'
 		>
-
 			<View style={globalStyles.inputContainer}>
 				<TextInput
 					placeholder='Email'
@@ -47,7 +40,6 @@ const Login = () => {
 					secureTextEntry
 				/>
 			</View>
-
 			<View style={globalStyles.buttonContainer}>
 				<Button
 					onPressButton={() => handelLogIn(email, password)}
@@ -62,7 +54,6 @@ const Login = () => {
 					text={'Register'}
 				/>
 			</View>
-
 		</KeyboardAvoidingView>
 	)
 };
