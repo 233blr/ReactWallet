@@ -2,7 +2,7 @@
 React Native Currency Converter
 
 * Login and registration;
-* Convert Currency;
+* [Convert Currency](https://exchangerate.host/#/);
 * To do Transaction;
 
 npm install
