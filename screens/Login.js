@@ -8,7 +8,12 @@ import { auth } from '../firebase';
 import UseAuth from '../hooks/useAuth';
 
 const Login = () => {
-	const {email, password, addValues} = useContext(LoginContext);
+	const {
+		email,
+		password,
+		handleChangeEmail,
+		handleChangePassword
+	} = useContext(LoginContext);
 	const {handelLogIn, handelSingUp} = UseAuth();
 	const navigation = useNavigation();
 
@@ -29,13 +34,13 @@ const Login = () => {
 				<TextInput
 					placeholder='Email'
 					value={email}
-					onChangeText={text => addValues(text, 'email')}
+					onChangeText={handleChangeEmail}
 					style={globalStyles.input}
 				/>
 				<TextInput
 					placeholder='Password'
 					value={password}
-					onChangeText={text => addValues(text, 'pass')}
+					onChangeText={handleChangePassword}
 					style={globalStyles.input}
 					secureTextEntry
 				/>

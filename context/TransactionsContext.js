@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import { rootRef } from "../firebase";
+import { auth, rootRef } from "../firebase";
 import filterUsers from "../helpers/filterUsers";
 import checkTransaction from "../helpers/checkTransaction";
 
@@ -12,11 +12,25 @@ const TransactionsProvider = ({children}) => {
 	const [histValues, setHistValues] = useState([]);
 	const [currentUsers, setCurrentUsers] = useState([]);
 
-	const setTransactions = (value, email) => {
+	const setTransactionsToUser = () => {
 		rootRef
 			.child('transactions')
-			.orderByChild(`${value}`)
-			.equalTo(`${email}`)
+			.orderByChild('toUser')
+			.equalTo(`${auth.currentUser?.email}`)
+			.on('value', item => {
+				if (item.val()) {
+					setHistValues(Object.values(item.val()));
+				} else {
+					setHistValues(null);
+				}
+			});
+	};
+
+	const setTransactionsFromUser = () => {
+		rootRef
+			.child('transactions')
+			.orderByChild('fromUser')
+			.equalTo(`${auth.currentUser?.email}`)
 			.on('value', item => {
 				if (item.val()) {
 					setHistValues(Object.values(item.val()));
@@ -44,19 +58,27 @@ const TransactionsProvider = ({children}) => {
 		setCurrentUsers([]);
 	};
 
+	const handleChangeValue = text => setValue(text);
+
+	const handleChangeUsersList = text => setUsersList(text);
+
+	const handleChangeUserList = user => setUserInputList(user);
+
 	return (
 		<TransactionsContext.Provider value={
 			{
 				user,
 				value,
-				setValue,
 				setUsers,
 				histValues,
 				currentUsers,
+				sendTransaction,
 				setTransactions,
-				setUsersList,
-				setUserInputList,
-				sendTransaction
+				handleChangeValue,
+				handleChangeUserList,
+				handleChangeUsersList,
+				setTransactionsToUser,
+				setTransactionsFromUser,
 			}
 		}
 		>

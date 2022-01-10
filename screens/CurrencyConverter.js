@@ -4,7 +4,6 @@ import { CurrencyContextContext } from '../context/CurrencyContext';
 import { Button, ConversionInput } from '../components';
 import { globalStyles } from '../styles';
 import { URL } from '@env';
-import modalValues from '../constans/modalValues';
 import currency from '../constans/currency';
 import axios from 'axios';
 
@@ -16,12 +15,11 @@ const CurrencyConverter = () => {
 		amountFrom,
 		setAmountTo,
 		modalVisible,
-		setModalValue,
 		currencyValue,
-		setModalVisible,
 		reverseCurrency,
 		addCurrencyValue,
 		getConversionSum,
+		setConversionInput,
 		changeConversionValue,
 	} = useContext(CurrencyContextContext);
 
@@ -42,7 +40,7 @@ const CurrencyConverter = () => {
 					animationType='slide'
 					transparent={true}
 					visible={modalVisible}
-					onRequestClose={() => setModalVisible(!modalVisible)}
+					onRequestClose={closeModal}
 				>
 					<View style={globalStyles.modalView}>
 						<Text style={[globalStyles.conversionText, globalStyles.modalTitle]}>
@@ -53,7 +51,7 @@ const CurrencyConverter = () => {
 							.map(item => (
 								<Button
 									key={item}
-									onPressButton={addCurrencyValue}
+									onPressButton={() => addCurrencyValue(item)}
 									btnStyle={[globalStyles.button, globalStyles.buttonOutline]}
 									textStyle={globalStyles.buttonOutlineText}
 									text={item}
@@ -73,11 +71,8 @@ const CurrencyConverter = () => {
 					<ConversionInput
 						text={currencyValue[0]}
 						value={amountFrom.toString()}
-						onButtonPress={() => {
-							setModalVisible(true);
-							setModalValue(modalValues[0]);
-						}}
-						onChangeValue={text => getConversionSum(text)}
+						onButtonPress={setConversionInput}
+						onChangeValue={getConversionSum}
 						editable={true}
 					/>
 

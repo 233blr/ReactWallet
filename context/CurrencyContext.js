@@ -10,7 +10,7 @@ const CurrencyContextProvider = ({children}) => {
 	const [amountFrom, setAmountFrom] = useState('');
 	const [amountTo, setAmountTo] = useState('');
 
-	const addCurrencyValue = () => {
+	const addCurrencyValue = item => {
 		setCurrencyValue(prevValue => {
 			prevValue.splice(modalValue.value, 1, item)
 			return [...prevValue];
@@ -20,13 +20,18 @@ const CurrencyContextProvider = ({children}) => {
 
 	const closeModal = () => setModalVisible(!modalVisible);
 
-	const getConversionSum = (text) => setAmountFrom(text);
+	const getConversionSum = text => setAmountFrom(text);
 
 	const reverseCurrency = () => setCurrencyValue([...currencyValue.reverse()]);
 
 	const changeConversionValue = () => {
 		setModalVisible(true);
 		setModalValue(modalValues[1]);
+	};
+
+	const setConversionInput = () => {
+			setModalVisible(true);
+			setModalValue(modalValues[0]);
 	};
 
 	return (
@@ -39,11 +44,10 @@ const CurrencyContextProvider = ({children}) => {
 				setAmountTo,
 				modalVisible,
 				currencyValue,
-				setModalValue,
-				setModalVisible,
 				reverseCurrency,
 				addCurrencyValue,
 				getConversionSum,
+				setConversionInput,
 				changeConversionValue,
 			}
 		}

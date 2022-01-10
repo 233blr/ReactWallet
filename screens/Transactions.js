@@ -11,14 +11,16 @@ const Transactions = () => {
 	const {
 		user,
 		value,
-		setValue,
 		setUsers,
 		histValues,
 		currentUsers,
-		setUsersList,
 		sendTransaction,
 		setTransactions,
-		setUserInputList,
+		handleChangeValue,
+		handleChangeUserList,
+		handleChangeUsersList,
+		setTransactionsToUser,
+		setTransactionsFromUser,
 	} = useContext(TransactionsContext);
 
 	useEffect(() => {
@@ -33,21 +35,21 @@ const Transactions = () => {
 					placeholder={'user email'}
 					title={'To whom to transfer:'}
 					value={user}
-					onChangeValue={(text) => setUsersList(text)}
+					onChangeValue={handleChangeUsersList}
 				/>
 				<TransactionInputList
 					data={currentUsers}
-					selectUser={user => setUserInputList(user)}
+					selectUser={handleChangeUserList}
 				/>
 				<TransactionInput
 					placeholder={'0'}
 					title={'Transfer amount:'}
 					keyboardType={'numeric'}
 					value={value}
-					onChangeValue={(sum) => setValue(sum)}
+					onChangeValue={handleChangeValue}
 				/>
 				<Button
-					onPressButton={() => sendTransaction}
+					onPressButton={sendTransaction}
 					text={'Send'}
 				/>
 
@@ -55,8 +57,8 @@ const Transactions = () => {
 				<View style={globalStyles.translationListContainer}>
 					<View style={globalStyles.translationHistButtons}>
 						<HistoryButtons
-							setFrom={() => setTransactions('fromUser', auth.currentUser?.email)}
-							setTo={() => setTransactions('toUser', auth.currentUser?.email)}
+							setFrom={setTransactionsFromUser}
+							setTo={setTransactionsToUser}
 						/>
 					</View>
 					{
