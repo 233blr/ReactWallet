@@ -1,13 +1,13 @@
 import Button from './Button';
 import TransactionHistItem from './TransactionHistItem';
-import HistoryButtons from './HistoryButtons';
+import TransactionHistoryButtons from './TransactionHistoryButtons';
 import ConversionInput from './ConversionInput';
 import TransactionInput from './TransactionInput';
 import TransactionInputList from './TransactionInputList';
 
 export {
 	Button,
-	HistoryButtons,
+	TransactionHistoryButtons,
 	ConversionInput,
 	TransactionInput,
 	TransactionHistItem,

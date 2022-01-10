@@ -6,7 +6,7 @@ import { globalStyles } from '../styles';
 import { Button } from '../components';
 
 const Home = () => {
-	const {handelSingOut} = useAuth();
+	const { handelSingOut } = useAuth();
 
 	return (
 		<View style={globalStyles.container}>

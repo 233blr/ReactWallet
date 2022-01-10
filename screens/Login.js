@@ -5,16 +5,16 @@ import { LoginContext } from '../context/LoginContext';
 import { globalStyles } from '../styles';
 import { Button } from '../components';
 import { auth } from '../firebase';
-import UseAuth from '../hooks/useAuth';
 
 const Login = () => {
 	const {
 		email,
 		password,
+		handelLogIn,
+		handelSingUp,
 		handleChangeEmail,
 		handleChangePassword
 	} = useContext(LoginContext);
-	const {handelLogIn, handelSingUp} = UseAuth();
 	const navigation = useNavigation();
 
 	useEffect(() => {
@@ -47,13 +47,13 @@ const Login = () => {
 			</View>
 			<View style={globalStyles.buttonContainer}>
 				<Button
-					onPressButton={() => handelLogIn(email, password)}
+					onPressButton={handelLogIn}
 					btnStyle={globalStyles.button}
 					textStyle={globalStyles.buttonText}
 					text={'Login'}
 				/>
 				<Button
-					onPressButton={() => handelSingUp(email, password)}
+					onPressButton={handelSingUp}
 					btnStyle={[globalStyles.button, globalStyles.buttonOutline]}
 					textStyle={globalStyles.buttonOutlineText}
 					text={'Register'}

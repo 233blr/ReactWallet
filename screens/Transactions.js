@@ -4,7 +4,7 @@ import { globalStyles } from '../styles';
 import { auth, db } from '../firebase';
 import { FlatList, Keyboard, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { TransactionsContext } from '../context/TransactionsContext';
-import HistoryButtons from "../components/HistoryButtons";
+import TransactionHistoryButtons from "../components/TransactionHistoryButtons";
 import TransactionHistItem from "../components/TransactionHistItem";
 import keyExtractor from "../helpers/keyExtractor";
 
@@ -15,11 +15,11 @@ const Transactions = () => {
 		setUsers,
 		histValues,
 		currentUsers,
-		sendTransaction,
 		setTransactions,
+		sendTransaction,
 		handleChangeValue,
+		addUsersToUsersList,
 		handleChangeUserList,
-		handleChangeUsersList,
 		setTransactionsToUser,
 		setTransactionsFromUser,
 	} = useContext(TransactionsContext);
@@ -36,7 +36,7 @@ const Transactions = () => {
 					placeholder={'user email'}
 					title={'To whom to transfer:'}
 					value={user}
-					onChangeValue={handleChangeUsersList}
+					onChangeValue={addUsersToUsersList}
 				/>
 				<TransactionInputList
 					data={currentUsers}
@@ -57,7 +57,7 @@ const Transactions = () => {
 				<Text style={globalStyles.translationHistTitle}>History</Text>
 				<View style={globalStyles.translationListContainer}>
 					<View style={globalStyles.translationHistButtons}>
-						<HistoryButtons
+						<TransactionHistoryButtons
 							setFrom={setTransactionsFromUser}
 							setTo={setTransactionsToUser}
 						/>

@@ -1,6 +1,5 @@
 import React, { createContext, useState } from 'react';
 import modalValues from "../constans/modalValues";
-import { URL } from '@env';
 
 export const CurrencyContextContext = createContext({});
 
@@ -11,17 +10,15 @@ const CurrencyContextProvider = ({children}) => {
 	const [amountFrom, setAmountFrom] = useState('');
 	const [amountTo, setAmountTo] = useState('');
 
-	const url = `${URL}?from=${currencyValue[0]}&to=${currencyValue[1]}&amount=${amountFrom}`
-
 	const addCurrencyValue = item => {
 		setCurrencyValue(prevValue => {
 			prevValue.splice(modalValue.value, 1, item)
 			return [...prevValue];
 		});
-		setModalVisible(!modalVisible);
+		toggleModal();
 	};
 
-	const closeModal = () => setModalVisible(!modalVisible);
+	const toggleModal = () => setModalVisible(false);
 
 	const getConversionSum = text => setAmountFrom(text);
 
@@ -40,9 +37,8 @@ const CurrencyContextProvider = ({children}) => {
 	return (
 		<CurrencyContextContext.Provider value={
 			{
-				url,
 				amountTo,
-				closeModal,
+				toggleModal,
 				modalValue,
 				amountFrom,
 				setAmountTo,

@@ -3,7 +3,7 @@ import { globalStyles } from "../styles";
 import { Text, TouchableOpacity } from "react-native";
 import { TransactionsContext } from "../context/TransactionsContext";
 
-const HistoryButtons = ({setFrom, setTo}) => {
+const TransactionHistoryButtons = ({setFrom, setTo}) => {
 	const {flag, setFlag} = useContext(TransactionsContext);
 
 	const setTransactionFrom = () => {
@@ -44,4 +44,4 @@ const HistoryButtons = ({setFrom, setTo}) => {
 	)
 };
 
-export default HistoryButtons;
+export default TransactionHistoryButtons;

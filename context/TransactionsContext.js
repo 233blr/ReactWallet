@@ -13,10 +13,10 @@ const TransactionsProvider = ({children}) => {
 	const [histValues, setHistValues] = useState([]);
 	const [currentUsers, setCurrentUsers] = useState([]);
 
-	const setTransactionsToUser = () => {
+	const setTransactions = (orderBy) => {
 		rootRef
 			.child('transactions')
-			.orderByChild('toUser')
+			.orderByChild(orderBy)
 			.equalTo(`${auth.currentUser?.email}`)
 			.on('value', item => {
 				if (item.val()) {
@@ -27,19 +27,9 @@ const TransactionsProvider = ({children}) => {
 			});
 	};
 
-	const setTransactionsFromUser = () => {
-		rootRef
-			.child('transactions')
-			.orderByChild('fromUser')
-			.equalTo(`${auth.currentUser?.email}`)
-			.on('value', item => {
-				if (item.val()) {
-					setHistValues(Object.values(item.val()));
-				} else {
-					setHistValues(null);
-				}
-			});
-	};
+	const setTransactionsToUser = () => setTransactions('toUser');
+
+	const setTransactionsFromUser = () => setTransactions('fromUser');
 
 
 	const setUsersList = text => {
@@ -61,7 +51,7 @@ const TransactionsProvider = ({children}) => {
 
 	const handleChangeValue = text => setValue(text);
 
-	const handleChangeUsersList = text => setUsersList(text);
+	const addUsersToUsersList = text => setUsersList(text);
 
 	const handleChangeUserList = user => setUserInputList(user);
 
@@ -77,8 +67,8 @@ const TransactionsProvider = ({children}) => {
 				currentUsers,
 				sendTransaction,
 				handleChangeValue,
+				addUsersToUsersList,
 				handleChangeUserList,
-				handleChangeUsersList,
 				setTransactionsToUser,
 				setTransactionsFromUser,
 			}

@@ -2,7 +2,7 @@ import { Image } from "react-native";
 import icons from "../constans/icons";
 import colors from "../constans/colors";
 
-const tabBarIconHandler = ({focused}) => (
+const tabBarIcon = ({focused}) => (
 	<Image
 		source={icons.transactionIcon}
 		resizeMode='contain'
@@ -14,4 +14,4 @@ const tabBarIconHandler = ({focused}) => (
 	/>
 );
 
-export default tabBarIconHandler;
+export default tabBarIcon;

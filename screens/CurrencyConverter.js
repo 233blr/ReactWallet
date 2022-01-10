@@ -3,14 +3,14 @@ import { Keyboard, Modal, Text, TouchableWithoutFeedback, View } from 'react-nat
 import { CurrencyContextContext } from '../context/CurrencyContext';
 import { Button, ConversionInput } from '../components';
 import { globalStyles } from '../styles';
+import { URL } from '@env';
 import currency from '../constans/currency';
 import getCurrencyValue from "../API/getCurrencyValue";
 
 const CurrencyConverter = () => {
 	const {
-		url,
 		amountTo,
-		closeModal,
+		toggleModal,
 		modalValue,
 		amountFrom,
 		setAmountTo,
@@ -27,7 +27,7 @@ const CurrencyConverter = () => {
 		if (amountFrom.length === 0) {
 			setAmountTo('');
 		} else {
-			getCurrencyValue(setAmountTo, url);
+			getCurrencyValue(setAmountTo, `${URL}?from=${currencyValue[0]}&to=${currencyValue[1]}&amount=${amountFrom}`);
 		}
 	}, [amountFrom, currencyValue]);
 
@@ -38,7 +38,7 @@ const CurrencyConverter = () => {
 					animationType='slide'
 					transparent={true}
 					visible={modalVisible}
-					onRequestClose={closeModal}
+					onRequestClose={toggleModal}
 				>
 					<View style={globalStyles.modalView}>
 						<Text style={[globalStyles.conversionText, globalStyles.modalTitle]}>
@@ -60,7 +60,7 @@ const CurrencyConverter = () => {
 							})
 						}
 						<Button
-							onPressButton={closeModal}
+							onPressButton={toggleModal}
 							btnStyle={globalStyles.singOutButton}
 							textStyle={globalStyles.buttonText}
 							text={'Close'}
