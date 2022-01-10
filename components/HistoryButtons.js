@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { globalStyles } from "../styles";
 import { Text, TouchableOpacity } from "react-native";
+import { TransactionsContext } from "../context/TransactionsContext";
 
 const HistoryButtons = ({setFrom, setTo}) => {
-	const [flag, setFlag] = useState(true);
+	const {flag, setFlag} = useContext(TransactionsContext);
 
 	const setTransactionFrom = () => {
 		setFrom();

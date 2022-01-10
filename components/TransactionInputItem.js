@@ -7,7 +7,7 @@ const TransactionInputItem = ({item, onPress}) => {
 		<TouchableOpacity
 			key={item}
 			style={globalStyles.transactionInputListItem}
-			onPress={() => onPress(item)}
+			onPress={onPress}
 		>
 			<Text>
 				{item}

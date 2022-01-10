@@ -1,9 +1,7 @@
 import React from 'react';
-import { Image } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { CurrencyConverter, Home, Transactions } from '../screens';
-import colors from "../constans/colors";
-import icons from "../constans/icons";
+import tabBarIconHandler from "../helpers/tabBarIconHandler";
 
 const Tab = createBottomTabNavigator();
 
@@ -14,51 +12,21 @@ const Tabs = () => {
 				name="Home"
 				component={Home}
 				options={{
-					tabBarIcon: ({focused}) => (
-						<Image
-							source={icons.homeIcon}
-							resizeMode='contain'
-							style={{
-								width: 25,
-								height: 25,
-								tintColor: focused ? colors.blue : colors.grey,
-							}}
-						/>
-					)
+					tabBarIcon: tabBarIconHandler
 				}}
 			/>
 			<Tab.Screen
 				name="Currency Converter"
 				component={CurrencyConverter}
 				options={{
-					tabBarIcon: ({focused}) => (
-						<Image
-							source={icons.currencyExchangeIcon}
-							resizeMode='contain'
-							style={{
-								width: 25,
-								height: 25,
-								tintColor: focused ? colors.blue : colors.grey,
-							}}
-						/>
-					)
+					tabBarIcon: tabBarIconHandler
 				}}
 			/>
 			<Tab.Screen
 				name="Transactions"
 				component={Transactions}
 				options={{
-					tabBarIcon: ({focused}) => (
-						<Image
-							source={icons.transactionIcon}
-							resizeMode='contain'
-							style={{
-								width: 25,
-								height: 25,
-								tintColor: focused ? colors.blue : colors.grey,
-							}}
-						/>
-					)
+					tabBarIcon: tabBarIconHandler
 				}}
 			/>
 		</Tab.Navigator>

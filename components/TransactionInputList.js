@@ -2,6 +2,7 @@ import React from 'react';
 import { FlatList } from 'react-native';
 import { globalStyles } from '../styles';
 import TransactionInputItem from "./TransactionInputItem";
+import keyExtractor from "../helpers/keyExtractor";
 
 const TransactionInput = ({data, selectUser}) => {
 	return (
@@ -16,7 +17,7 @@ const TransactionInput = ({data, selectUser}) => {
 					/>
 				)
 				}
-				keyExtractor={(item, index) => index.toString()}
+				keyExtractor={keyExtractor}
 			/> :
 			null
 	)

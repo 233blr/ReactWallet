@@ -3,12 +3,12 @@ import { Keyboard, Modal, Text, TouchableWithoutFeedback, View } from 'react-nat
 import { CurrencyContextContext } from '../context/CurrencyContext';
 import { Button, ConversionInput } from '../components';
 import { globalStyles } from '../styles';
-import { URL } from '@env';
 import currency from '../constans/currency';
-import axios from 'axios';
+import getCurrencyValue from "../API/getCurrencyValue";
 
 const CurrencyConverter = () => {
 	const {
+		url,
 		amountTo,
 		closeModal,
 		modalValue,
@@ -27,9 +27,7 @@ const CurrencyConverter = () => {
 		if (amountFrom.length === 0) {
 			setAmountTo('');
 		} else {
-			axios.get(`${URL}?from=${currencyValue[0]}&to=${currencyValue[1]}&amount=${amountFrom}`)
-				.then(response => setAmountTo(response.data.result.toFixed(2)))
-				.catch(error => alert(error.message))
+			getCurrencyValue(setAmountTo, url);
 		}
 	}, [amountFrom, currencyValue]);
 
@@ -47,16 +45,20 @@ const CurrencyConverter = () => {
 							Convert {modalValue.title}:
 						</Text>
 						{currency
-							.filter(item => item !== currencyValue[0] && item !== currencyValue[1])
-							.map(item => (
-								<Button
-									key={item}
-									onPressButton={() => addCurrencyValue(item)}
-									btnStyle={[globalStyles.button, globalStyles.buttonOutline]}
-									textStyle={globalStyles.buttonOutlineText}
-									text={item}
-								/>
-							))}
+							.filter(item => {
+								if (item !== currencyValue[0] && item !== currencyValue[1]) {
+									return (
+										<Button
+											key={item}
+											onPressButton={addCurrencyValue}
+											btnStyle={[globalStyles.button, globalStyles.buttonOutline]}
+											textStyle={globalStyles.buttonOutlineText}
+											text={item}
+										/>
+									);
+								}
+							})
+						}
 						<Button
 							onPressButton={closeModal}
 							btnStyle={globalStyles.singOutButton}

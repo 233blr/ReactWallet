@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { auth } from "../firebase";
 import { globalStyles } from "../styles";
+import addDate from "../utils/addDate";
 
 const TransactionHistItem = ({data}) => {
 	return (
@@ -12,7 +13,7 @@ const TransactionHistItem = ({data}) => {
 					<Text>from: {data.fromUser}</Text>
 			}
 			<Text>sum: {data.value}</Text>
-			<Text>date: {new Date(data.date).toUTCString().slice(5, 22)}</Text>
+			<Text>date: {addDate}</Text>
 		</View>
 	)
 }

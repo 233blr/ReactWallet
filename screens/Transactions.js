@@ -6,6 +6,7 @@ import { FlatList, Keyboard, Text, TouchableWithoutFeedback, View } from 'react-
 import { TransactionsContext } from '../context/TransactionsContext';
 import HistoryButtons from "../components/HistoryButtons";
 import TransactionHistItem from "../components/TransactionHistItem";
+import keyExtractor from "../helpers/keyExtractor";
 
 const Transactions = () => {
 	const {
@@ -67,7 +68,7 @@ const Transactions = () => {
 								style={globalStyles.transactionHistList}
 								data={histValues}
 								renderItem={({item}) => <TransactionHistItem data={item}/>}
-								keyExtractor={(item, index) => index.toString()}
+								keyExtractor={keyExtractor}
 							/>
 						) : (
 							<View style={globalStyles.transactionNoData}>

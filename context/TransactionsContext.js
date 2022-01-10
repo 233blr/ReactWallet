@@ -6,6 +6,7 @@ import checkTransaction from "../helpers/checkTransaction";
 export const TransactionsContext = createContext({});
 
 const TransactionsProvider = ({children}) => {
+	const [flag, setFlag] = useState(true);
 	const [user, setUser] = useState('');
 	const [value, setValue] = useState('');
 	const [users, setUsers] = useState([]);
@@ -68,12 +69,13 @@ const TransactionsProvider = ({children}) => {
 		<TransactionsContext.Provider value={
 			{
 				user,
+				flag,
 				value,
+				setFlag,
 				setUsers,
 				histValues,
 				currentUsers,
 				sendTransaction,
-				setTransactions,
 				handleChangeValue,
 				handleChangeUserList,
 				handleChangeUsersList,
