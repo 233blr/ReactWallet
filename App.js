@@ -1,20 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import Tabs from './navigator/tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { StatusBar } from "react-native";
+import { Login } from './screens';
+import LoginProvider from './context/LoginContext';
+import TransactionsProvider from "./context/TransactionsContext";
+import CurrencyContextProvider from "./context/CurrencyContext";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+const Stack = createNativeStackNavigator();
+
+const App = () => {
+	return (
+		<CurrencyContextProvider>
+			<TransactionsProvider>
+				<LoginProvider>
+					<NavigationContainer>
+						<Stack.Navigator>
+							<Stack.Screen options={{headerShown: false}} name="Login" component={Login}/>
+							<Stack.Screen options={{headerShown: false}} name="Main" component={Tabs}/>
+						</Stack.Navigator>
+						<StatusBar barStyle='dark-content'/>
+					</NavigationContainer>
+				</LoginProvider>
+			</TransactionsProvider>
+		</CurrencyContextProvider>
+	);
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
